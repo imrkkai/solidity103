@@ -1,0 +1,114 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "_arr",
+						"type": "uint256[]"
+					}
+				],
+				"name": "getSum",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "sum",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					}
+				],
+				"name": "multiTransferETH",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token",
+						"type": "address"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					}
+				],
+				"name": "multiTransferToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Airdrop.sol": "Airdrop"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Airdrop.sol": {
+			"keccak256": "0xd43d1a4347e05ba891d79f5a842730fd752876a8b60671cea26f505ab10cb1e9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d85980fc62c7dd534a007655e183f1059546089b2bd47cc3905b9fe6b40763e4",
+				"dweb:/ipfs/QmSc8F3k72pkqpMtU82fmFmETciRAsksaj5HaL94xPzN7E"
+			]
+		},
+		"IERC20.sol": {
+			"keccak256": "0x58af31acf2a8bdd9589d4f3704566f0541282eabcf8815ba2947ee59a5fc2aba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://157988f4b56a046d7ab21777ee75573a1828b187147e2924e17132d41e5fbaa8",
+				"dweb:/ipfs/QmXf2qKj58BJUg4iNtMxNzW2k5pAhe8sogWfiH3NvXmDsQ"
+			]
+		}
+	},
+	"version": 1
+}

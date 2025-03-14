@@ -1,0 +1,93 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"MerkleTree.sol": "MerkleProof"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ERC721.sol": {
+			"keccak256": "0x70cde3923d5ad3106cab321be2b1d9e03a84b159ceffee5a8dac5e9e4b034f53",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://65f59cbfbf469d8911cd0997981f4dd33df299a81ba352719a15aa74c36c1af2",
+				"dweb:/ipfs/QmYkZtVLqA2CAfr3AdSLcoFFWPR7vtTUF395Mm3DtgHjX9"
+			]
+		},
+		"IERC165.sol": {
+			"keccak256": "0x2284ab5d4e6689f667d69784f647c34a26351caea8bee03148ea2bda30ed03f6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e03cee1605974698db6b1fd607422a5b4e13e32379f89fac901fae2819e70741",
+				"dweb:/ipfs/QmNvx4EBibTcCefLW3u4zH34MHqmDYDxRp1Le3hTQ31ujA"
+			]
+		},
+		"IERC721.sol": {
+			"keccak256": "0x6ab3eb3263615a541821482b4be5f12cdbc0913e174295882dab380d54d08e77",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e46dd4dc3d356197e3e1d7e8fcf6626066061381813eacf06ea8e742ee2f488c",
+				"dweb:/ipfs/QmXbvL8hoUs16yDaP2zTkvhBRhcoGeGtuNLjJNLv2JGS68"
+			]
+		},
+		"IERC721Metadata.sol": {
+			"keccak256": "0xe6016052c40c96ce47f9a1fd15495e672d2e5505d1ffa5f1fc2f5cf1767d7baf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://115f14293b2d3f193b3e06857058c1024e8b0fac80ffb056c87b36a800fa3603",
+				"dweb:/ipfs/QmRVS6GkmNgWkR5xdxyvewQ7YchbNrxjq5DQLysFMicXHc"
+			]
+		},
+		"IERC721Receiver.sol": {
+			"keccak256": "0xaa93d15fbdfd1c470b82b6d4a2ec910a62aacd123da34e6727c19a51f9ea93bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://029110bde130289234df362aab415d7d5449bf5148202a42cb48ddcd90c33bbd",
+				"dweb:/ipfs/QmQADgWk1mdEpDWGeWU8yWWKahFFQQfN7uyiAwtBDpeM3U"
+			]
+		},
+		"MerkleTree.sol": {
+			"keccak256": "0x29157261bb11e34191f3f59fafcf70ab6484539fed229b33ff36fef83e2eddfb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b6d189365872600012862999a412bdc9a2f0072ca3f9134a5e56cc211f732d8",
+				"dweb:/ipfs/QmPZTwxwftgSFXJytRvEWSk62qfrtrmW2QiP4HNQqikadd"
+			]
+		},
+		"Strings.sol": {
+			"keccak256": "0xfe06ef1d5e4b63615dad491a475fc2ee9b97c5ef2598775b9495190a174b088a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://083dc9161d06d700151a3a13a10815f090eb3f615b52692bbc2f51f98d995381",
+				"dweb:/ipfs/QmaQc2nLdyxMkdCkpoJbJiz7A7FgrbGQp4xC8hsV6yFiAe"
+			]
+		}
+	},
+	"version": 1
+}

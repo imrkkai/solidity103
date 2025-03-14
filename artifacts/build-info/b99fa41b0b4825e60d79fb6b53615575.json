@@ -1,0 +1,69 @@
+{
+	"id": "b99fa41b0b4825e60d79fb6b53615575",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"ERC721.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.21;\r\n\r\n// 同质化代币\r\n// BTC和ETH这类代币都属于同质化代币，矿工挖出的第1枚BTC与第10000枚BTC并没有不同，是等价的。\r\n\r\n// 但世界中很多物品是不同质的，其中包括房产、古董、虚拟艺术品等等。\r\n// 这类物品无法用同质化代币抽象。\r\n// 因此，以太坊EIP721提出了ERC721标准，来抽象非同质化的物品。\r\n\r\n//EIP和ERC\r\n\r\n// EIP全称是Ethereum Improvement Proposals（以太坊改进建议）, 是以太坊开发者社区提出的改进建议, 是一系列已编号排定的文件,类似互联网上IETF的RFC。\r\n// EIP可以是Ethereum 生态中任意领域的改进、比如新特性、ERC、协议改进、编程工具等等。\r\n\r\n// ERC全称Ethereum Request For Comment（以太坊意见征求稿），泳衣记录以太坊应用级的各种开发标准和协议。\r\n// 如典型的Token标准（ERC20、ERC721）、名字注册（ERC26、ERC13），URI范式（ERC67），Library/Package格式（EIP82）、钱包格式（EIP75、EIP85）。\r\n\r\n// ERC协议标准是影响以太坊发展的重要因素，像ERC20、ERC223，ERC721、ERC777等，都对以太坊生态产生了很大影响。\r\n\r\n// 所以最终结论：EIP包含ERC。\r\n\r\n\r\n// ERC165\r\n// 通过ERC165标准、智能合约可以声明它支持的接口，供其它合约检查。\r\n// 简单的说，ERC165就是检查一个智能合约是不是支持了ERC721、ERC1155的接口\r\n\r\n// IERC165接口合约只声明了一个supportsInterface函数，输入要检查的interface接口id，若合约实现了该接口id，则返回true:\r\n// 参考IERC165.sol\r\n\r\n// 我们可以看下ERC721是如何实现supportsInterface()函数的：\r\n/*\r\n    function supportsInterface(bytes4 interfaceId) external pure override returns (bool)\r\n    {\r\n        return\r\n            interfaceId == type(IERC721).interfaceId ||\r\n            interfaceId == type(IERC165).interfaceId;\r\n    }\r\n*/\r\n\r\n// 当查询的是IERC721或IERC165的接口id时，返回true；反之返回false。\r\n\r\n\r\n// IERC721\r\n// IERC721是ERC721标准的接口合约，规定了ERC721要实现的基本函数。\r\n// 它利用tokenId来表示特定的非同质化代币，授权或转账都要明确tokenId；\r\n// 而ERC20只需要明确转账的数额即可。\r\n\r\n// 接口定义参考: IERC721.sol\r\n\r\n// IERC721事件\r\n\r\n// IERC721包含3个事件，其中Transfer和Approval事件在ERC20中也有。\r\n// - Transfer事件：在转账时被释放，记录代币的发出地址from，接收地址to和tokenid。\r\n// - Approval事件：在授权时释放，记录授权地址owner，被授权地址approved和tokenid。\r\n// - ApprovalForAll事件：在批量授权时释放，记录批量授权的发出地址owner，被授权地址operator和授权与否的approved。\r\n\r\n\r\n// IERC721函数\r\n\r\n// balanceOf：返回某地址的NFT持有量balance。\r\n// ownerOf：返回某tokenId的主人owner。\r\n// transferFrom：普通转账，参数为转出地址from，接收地址to和tokenId。\r\n// safeTransferFrom：安全转账（如果接收方是合约地址，会要求实现ERC721Receiver接口）。参数为转出地址from，接收地址to和tokenId。\r\n// approve：授权另一个地址使用你的NFT。参数为被授权地址approve和tokenId。\r\n// getApproved：查询tokenId被批准给了哪个地址。\r\n// setApprovalForAll：将自己持有的该系列NFT批量授权给某个地址operator。\r\n// isApprovedForAll：查询某地址的NFT是否批量授权给了另一个operator地址。\r\n// safeTransferFrom：安全转账的重载函数，参数里面包含了data。\r\n\r\n\r\n// IERC721Receiver\r\n\r\n// 如果一个合约没有实现相关ERC721的相关函数，转入的NFT就进入了 黑洞，永远转不出来了。\r\n// 为了防止误转账，ERC721实现了safeTransferFrom()安全转账函数,目标合约必须实现了IERC721Receiver接口才能接收\r\n// ERC721代币，不会会revert。\r\n// IERC721Receiver接口只包含一个onERC721Received函数。\r\n\r\n// 参考：IERC721Receiver.sol\r\n\r\n\r\n//ERC721实现\r\n/*\r\n\r\nfunction _checkOnERC721Received(\r\n    address operator,\r\n    address from,\r\n    address to,\r\n    uint256 tokenId,\r\n    bytes memory data\r\n) internal {\r\n    if (to.code.length > 0) {\r\n        try IERC721Receiver(to).onERC721Received(operator, from, tokenId, data) returns (bytes4 retval) {\r\n            if (retval != IERC721Receiver.onERC721Received.selector) {\r\n                // Token rejected\r\n                revert IERC721Errors.ERC721InvalidReceiver(to);\r\n            }\r\n        } catch (bytes memory reason) {\r\n            if (reason.length == 0) {\r\n                // non-IERC721Receiver implementer\r\n                revert IERC721Errors.ERC721InvalidReceiver(to);\r\n            } else {\r\n                /// @solidity memory-safe-assembly\r\n                assembly {\r\n                    revert(add(32, reason), mload(reason))\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n*/\r\n\r\n// IERC721Metadata\r\n\r\n// IERC721Metadata是ERC721的扩展接口，实现了3个查询metadata元数据的常用函数:\r\n// - name(): 返回代币名称\r\n// - symbol(): 返回代币符号\r\n// - tokenURI(): 通过tokenId查询meta的链接url，ERC721特有的函数\r\n\r\n// ERC721主合约\r\n\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"ERC721.sol": {
+				"ast": {
+					"absolutePath": "ERC721.sol",
+					"exportedSymbols": {},
+					"id": 2,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".21"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						}
+					],
+					"src": "33:5268:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
