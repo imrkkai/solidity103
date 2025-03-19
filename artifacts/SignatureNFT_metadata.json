@@ -547,11 +547,11 @@
 			]
 		},
 		"Signature.sol": {
-			"keccak256": "0x21965578269c5da880b7f8a7b6394dccff90ecbb28ad9a6441b72059bdc9714c",
+			"keccak256": "0x0c2da763fb43ee09d415d19600bff449862c16a99bce112e8f9958c70aecc9d9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://36fe85668186ae5ec774c304e03d40d8a85aeef1e325bef533bfba47b12d7e4e",
-				"dweb:/ipfs/QmdmZPDhETmd2DhFGUM1aWytDQk2bsTYWcNbUbDTanoiw3"
+				"bzz-raw://d8ff6fb28b18e2e76d7b2dc9d5f03e0cc84e88a556dd8e22b7a52b625324a6e1",
+				"dweb:/ipfs/QmZAaDVaqu6S9unDcR9DFAyCVj4rgh9Pj1J5vyXFYasbPb"
 			]
 		},
 		"Strings.sol": {

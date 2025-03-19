@@ -1,0 +1,69 @@
+{
+	"id": "af3ce36a121af9948a3062da71722d1f",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"ERC1155.sol": {
+				"content": "\r\n// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.21;\r\n\r\n//ERC1155标准\r\n// 它支持一个合约包含多种代币。\r\n// 不论是ERC20还是ERC721标准，每个合约都对应一个独立的代币。\r\n// 假设我们要在以太坊上打造一个类似《魔兽世界》的大型游戏，这需要我们对每个装备都部署一个合约。\r\n// 上千种装备就要部署和管理上千个合约，这非常麻烦。\r\n\r\n//因此，以太坊EIP1155提出了一个多代币标准ERC1155，允许一个合约包含多个同质化和非同质化代币。ERC1155在GameFi应用最多，Decentraland、Sandbox等知名链游都使用它。\r\n\r\n//简单来说，ERC1155与之前介绍的非同质化代币标准ERC721类似：在ERC721中，每个代币都有一个tokenId作为唯一标识，每个tokenId只对应一个代币；而在ERC1155中，每一种代币都有一个id作为唯一标识，每个id对应一种代币。这样，代币种类就可以非同质的在同一个合约里管理了，并且每种代币都有一个网址uri来存储它的元数据，类似ERC721的tokenURI。下面是ERC1155的元数据接口合约IERC1155MetadataURI：\r\n\r\n\r\n// 那么怎么区分ERC1155中的某类代币是同质化还是非同质化代币呢？\r\n// 其实很简单：如果某个id对应的代币总量为1，那么它就是非同质化代币，类似ERC721；\r\n// 如果某个id对应的代币总量大于1，那么他就是同质化代币，因为这些代币都分享同一个id，类似ERC20。\r\n\r\n\r\n// IERC1155接口合约\r\n// IERC1155接口合约抽象了EIP1155需要实现的功能，其中包含4个事件和6个函数。与ERC721不同，因为ERC1155包含多类代币，它实现了批量转账和批量余额查询，一次操作多种代币。\r\n\r\n// IERC1155事件\r\n// TransferSingle事件：单类代币转账事件，在单币种转账时释放。\r\n// TransferBatch事件：批量代币转账事件，在多币种转账时释放。\r\n// ApprovalForAll事件：批量授权事件，在批量授权时释放。\r\n// URI事件：元数据地址变更事件，在uri变化时释放。\r\n\r\n\r\n// IERC1155函数\r\n\r\n// balanceOf()：单币种余额查询，返回account拥有的id种类的代币的持仓量。\r\n// balanceOfBatch()：多币种余额查询，查询的地址accounts数组和代币种类ids数组的长度要相等。\r\n// setApprovalForAll()：批量授权，将调用者的代币授权给operator地址。。\r\n// isApprovedForAll()：查询批量授权信息，如果授权地址operator被account授权，则返回true。\r\n// safeTransferFrom()：安全单币转账，将amount单位id种类的代币从from地址转账给to地址。如果to地址是合约，则会验证是否实现了onERC1155Received()接收函数。\r\n// safeBatchTransferFrom()：安全多币转账，与单币转账类似，只不过转账数量amounts和代币种类ids变为数组，且长度相等。如果to地址是合约，则会验证是否实现了onERC1155BatchReceived()接收函数。\r\n\r\n\r\n\r\n// IERC1155MetadataURI 元数据合约\r\n// ERC1155的可选接口，加入了uri()函数查询元数据\r\n\r\n// ERC1155接收合约\r\n// 与ERC721标准类似，为了避免代币被转入黑洞合约，ERC1155要求代币接收合约继承IERC1155Receiver并实现两个接收函数：\r\n\r\n//  onERC1155Received()：单币转账接收函数，接受ERC1155安全转账safeTransferFrom 需要实现并返回自己的选择器0xf23a6e61。\r\n//  onERC1155BatchReceived()：多币转账接收函数，接受ERC1155安全多币转账safeBatchTransferFrom 需要实现并返回自己的选择器0xbc197c81。\r\n\r\n\r\n// ERC1155 主合约\r\n// ERC1155主合约实现了IERC1155接口合约规定的函数，还有单币/多币的铸造和销毁函数。\r\n\r\n// ERC1155变量\r\n\r\n// ERC1155主合约包含4个状态变量：\r\n\r\n// name：代币名称\r\n// symbol：代币代号\r\n\r\n// _balances：代币持仓映射，记录代币种类id下某地址account的持仓量balances。\r\n\r\n// _operatorApprovals：批量授权映射，记录持有地址给另一个地址的授权情况。\r\n\r\n// ERC1155函数\r\n\r\n// ERC1155主合约包含16个函数：\r\n// 构造函数：初始化状态变量name和symbol。\r\n\r\n// supportsInterface()：实现ERC165标准，声明它支持的接口，供其他合约检查。\r\n// balanceOf()：实现IERC1155的balanceOf()，查询持仓量。与ERC721标准不同，这里需要输入查询的持仓地址account以及币种id。\r\n\r\n// balanceOfBatch()：实现IERC1155的balanceOfBatch()，批量查询持仓量。\r\n// setApprovalForAll()：实现IERC1155的setApprovalForAll()，批量授权，释放ApprovalForAll事件。\r\n// isApprovedForAll()：实现IERC1155的isApprovedForAll()，查询批量授权信息。\r\n\r\n// safeTransferFrom()：实现IERC1155的safeTransferFrom()，单币种安全转账，释放TransferSingle事件。与ERC721不同，这里不仅需要填发出方from，接收方to，代币种类id，还需要填转账数额amount。\r\n\r\n// safeBatchTransferFrom()：实现IERC1155的safeBatchTransferFrom()，多币种安全转账，释放TransferBatch事件。\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"ERC1155.sol": {
+				"ast": {
+					"absolutePath": "ERC1155.sol",
+					"exportedSymbols": {},
+					"id": 2,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".21"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "35:24:0"
+						}
+					],
+					"src": "35:5071:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
